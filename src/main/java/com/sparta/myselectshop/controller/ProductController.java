@@ -37,7 +37,19 @@ public class ProductController {
             @RequestParam("isAsc") boolean isAsc,
             @AuthenticationPrincipal UserDetailsImpl userDetails) {
         return productService.getProducts(userDetails.getUser(),
-                page - 1, size, sortBy, isAsc
-        );
+                page - 1, size, sortBy, isAsc);
+    }
+
+    @PostMapping("/products/{productsId}/folder")
+    public void addFolder(
+            @PathVariable Long productsId,
+            @RequestParam Long folderId,
+            @AuthenticationPrincipal UserDetailsImpl userDetails
+    ) {
+        productService.addFolder(productsId, folderId, userDetails.getUser());
+
+
     }
 }
+
+
